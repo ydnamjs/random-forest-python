@@ -55,9 +55,6 @@ for _feature in rawFeatureSets[0]:
     maxValues.append(float("-inf"))
     minValues.append(float("inf"))
 
-print(minValues)
-print(maxValues)
-
 for i in range(0, len(rawFeatureSets)):
     for j in range(0, len(rawFeatureSets[i])):
         if rawFeatureSets[i][j] > maxValues[j]:
@@ -65,5 +62,20 @@ for i in range(0, len(rawFeatureSets)):
         if rawFeatureSets[i][j] < minValues[j]:
             minValues[j] = rawFeatureSets[i][j]
 
-print(minValues)
-print(maxValues)
+featureBinSets = []
+for i in range(len(maxValues)):
+
+    featureBinSet = []
+
+    if maxValues[i] - minValues[i] < 3:
+        for i in range(minValues[i], maxValues[i] + 1):
+            featureBinSet.append([i, i])
+    else:
+        binWidth = (maxValues[i] - minValues[i]) // 3
+        featureBinSet.append([float("-inf"), minValues[i] + binWidth])
+        featureBinSet.append([minValues[i] + binWidth + 1, minValues[i] + binWidth * 2])
+        featureBinSet.append([(minValues[i] + binWidth * 2) + 1, float("inf")])
+    featureBinSets.append(featureBinSet)
+
+for featureBinSet in featureBinSets:
+    print(featureBinSet)

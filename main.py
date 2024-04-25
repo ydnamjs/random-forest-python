@@ -25,3 +25,22 @@ FEATURES_FILE = open(FEATURE_PATH, "r")
 
 LABELS_LINES = LABELS_FILE.readlines()
 FEATURES_LINES = FEATURES_FILE.readlines()
+
+if(len(LABELS_LINES) != len(FEATURES_LINES)):
+    print("BAD DATA: NUMBER OF LINES DONT MATCH")
+    exit
+
+rawFeatureSets = []
+for line in FEATURES_LINES:
+    
+    newFeatures = line.strip().split("\t")
+
+    rawFeatures = []
+    # First 2 features are identifiers
+    for i in range(2, len(newFeatures)):
+        rawFeatures.append(newFeatures[i])
+
+    rawFeatureSets.append(rawFeatures)    
+
+for rawFeatureSet in rawFeatureSets:
+    print(rawFeatureSet)

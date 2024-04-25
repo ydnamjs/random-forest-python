@@ -17,3 +17,11 @@ features = [
     "Number Us"
 ]
 
+LABELS_PATH = "./data/labeled_tweets.txt"
+FEATURE_PATH = "./data/tweet_feature.txt"
+
+LABELS_FILE = open(LABELS_PATH, "r")
+FEATURES_FILE = open(FEATURE_PATH, "r")
+
+LABELS_LINES = LABELS_FILE.readlines()
+FEATURES_LINES = FEATURES_FILE.readlines()

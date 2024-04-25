@@ -30,6 +30,15 @@ if(len(LABELS_LINES) != len(FEATURES_LINES)):
     print("BAD DATA: NUMBER OF LINES DONT MATCH")
     exit
 
+labels = []
+for line in LABELS_LINES:
+
+    # Class is the last value
+    labels.append(line.strip().split("\t")[-1])
+
+for label in labels:
+    print(label)
+
 rawFeatureSets = []
 for line in FEATURES_LINES:
     
@@ -41,6 +50,3 @@ for line in FEATURES_LINES:
         rawFeatures.append(newFeatures[i])
 
     rawFeatureSets.append(rawFeatures)    
-
-for rawFeatureSet in rawFeatureSets:
-    print(rawFeatureSet)

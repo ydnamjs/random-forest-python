@@ -1,6 +1,53 @@
 import math   
 from dataclasses import dataclass
 from typing import Dict
+from typing import Union
+
+@dataclass
+class TreeNode:
+    next: Union['TreeNode', int]
+
+def makeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int):
+    """
+        @param trainingData: list of a dictionary that maps each feature to its value
+            each element is an instance/row of training data
+        
+        @param maxDepth: the maximum depth of the tree/subtree
+    """
+
+    if maxDepth == 0:
+        return getMostFrequentLabel(trainingData)
+
+
+    pass
+
+def getMostFrequentLabel(trainingData: list[Dict[str, int]])->str:
+
+    labelCounts: Dict[str, int] = {}
+
+    for row in trainingData:
+        label = row.get("class")
+
+        if label is None:
+            exit()
+
+        currValue = labelCounts.get(label)
+
+        if (currValue is None):
+            labelCounts[label] = 1
+        else:
+            labelCounts[label] = labelCounts[label] + 1
+    
+    highestFrequency = int(float("-inf"))
+    for value in labelCounts.values():
+        if value > highestFrequency:
+            highestFrequency = value
+    
+    for key in labelCounts.keys():
+        if labelCounts.get(key) == highestFrequency:
+            return key
+    
+    return "ERROR"
 
 def calcConditionalEntropy(valueLabelDicts: list[Dict[int, int]])->float:
     """

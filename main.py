@@ -1,6 +1,14 @@
-from parseData import parseData
+from decisionTree import calcConditionalEntropy
 
-data = parseData()
+featuresValuesData = {
+    0: {
+        0: 1,
+        1: 1,
+    },
+    1: {
+        0: 0,
+        1: 4,
+    },
+}
 
-for row in data[0]:
-    print(row)
+print(calcConditionalEntropy(featuresValuesData.values()))

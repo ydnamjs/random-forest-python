@@ -1,38 +1,38 @@
 import math   
 from dataclasses import dataclass
+from typing import Dict
 
-@dataclass
-class FeatureValueData:
-    """Data about one of a feature's possible values used for calculating entropy"""
-    
-    # The value of the feature this class represents ex: value would be dog or cat for feature favorite animal
-    # Values are expected to be enumerated so dog would be 0 and cat would be 1 and fish would be 2
-    value: int
+def calcConditionalEntropy(featureValuesData: list[Dict[int, int]])->float:
+    """
+        @param featureValuesData: Dict of feature value to Dict of label to frequency
+            For example we might have a feature: favorite animal where 0 is a dog, 1 is a cat, and 2 is a fish
+            And say we are classifying if they are a serial killer or not 0 is no 1 is yes
+            And say there are 6 dog lovers that are not serial killers, 3 dog lovers that are serial killers,
+            4 cat lovers that are not serial killers, 7 cat lovers that are serial killers,
+            5 fish lovers that are not serial killers, and 9 fish lovers that are serial killers
+            our featureValueData would then be {0: {0: 6, 1: 3;}; 1: {0: 4, 1: 7}, 2: {0: 5, 1: 9}}
 
-    # The number of times the value appears in the dataset
-    frequency: int
-
-    # A dictionary of label: int (enumerated) to number of times it appears with this value of the feature
-    # EX: if 3 dog likers are not serial killers and 6 are, notSerialKiller (0) would map to 3 and isSerialKiller (1) would map to 6
-    classifications: dict
-
-def calcConditionalEntropy(featureValuesData: list[FeatureValueData])->float:
+        @returns the entropy of splitting on this feature
+    """
 
     totalInstances = 0
     for value in featureValuesData:
-        totalInstances += value.frequency
+        for classAmt in value.values():
+            totalInstances += classAmt
 
     entropy = 0
     for value in featureValuesData:
 
-        # Get the entropy for the value of this class
+        valueFrequency = 0
+        for numClassification in value.values():
+            valueFrequency += numClassification
+
         valueEntropy = 0
-        for numClassification in value.classifications.values():
+        for numClassification in value.values():
             if numClassification != 0:
-                classRatio = (1.0 * numClassification) / value.frequency
+                classRatio = (1.0 * numClassification) / valueFrequency
                 valueEntropy += classRatio * math.log2(classRatio)
 
-        # Add this values weighted entropy to the total
-        entropy += (-1.0 * value.frequency / totalInstances) * valueEntropy
+        entropy += (-1.0 * valueFrequency / totalInstances) * valueEntropy
 
     return entropy

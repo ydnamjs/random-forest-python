@@ -77,5 +77,19 @@ for i in range(len(maxValues)):
         featureBinSet.append([(minValues[i] + binWidth * 2) + 1, float("inf")])
     featureBinSets.append(featureBinSet)
 
-for featureBinSet in featureBinSets:
-    print(featureBinSet)
+binnedFeatureSets = []
+for i in range(0, len(rawFeatureSets)):
+    binnedFeatures = []
+    
+    for j in range(0, len(rawFeatureSets[i])):
+
+        for k in range(0, len(featureBinSets[j])):
+            
+            if(rawFeatureSets[i][j] >= featureBinSets[j][k][0] and rawFeatureSets[i][j] <= featureBinSets[j][k][1]):
+                binnedFeatures.append(k)
+                break
+
+    binnedFeatureSets.append(binnedFeatures)
+
+for binnedFeatureSet in binnedFeatureSets:
+    print(binnedFeatureSet)

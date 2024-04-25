@@ -36,9 +36,6 @@ for line in LABELS_LINES:
     # Class is the last value
     labels.append(line.strip().split("\t")[-1])
 
-for label in labels:
-    print(label)
-
 rawFeatureSets = []
 for line in FEATURES_LINES:
     
@@ -47,6 +44,26 @@ for line in FEATURES_LINES:
     rawFeatures = []
     # First 2 features are identifiers
     for i in range(2, len(newFeatures)):
-        rawFeatures.append(newFeatures[i])
+        rawFeatures.append(int(newFeatures[i]))
 
-    rawFeatureSets.append(rawFeatures)    
+    rawFeatureSets.append(rawFeatures)
+
+maxValues = []
+minValues = []
+
+for _feature in rawFeatureSets[0]:
+    maxValues.append(float("-inf"))
+    minValues.append(float("inf"))
+
+print(minValues)
+print(maxValues)
+
+for i in range(0, len(rawFeatureSets)):
+    for j in range(0, len(rawFeatureSets[i])):
+        if rawFeatureSets[i][j] > maxValues[j]:
+            maxValues[j] = rawFeatureSets[i][j]
+        if rawFeatureSets[i][j] < minValues[j]:
+            minValues[j] = rawFeatureSets[i][j]
+
+print(minValues)
+print(maxValues)

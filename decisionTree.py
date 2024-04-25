@@ -5,9 +5,11 @@ from typing import Union
 
 @dataclass
 class TreeNode:
-    next: Union['TreeNode', int]
+    isLeaf: bool
+    splitAttribute: str
+    next: Dict[int, "TreeNode"] | int
 
-def makeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int):
+def makeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int)->TreeNode:
     """
         @param trainingData: list of a dictionary that maps each feature to its value
             each element is an instance/row of training data
@@ -16,10 +18,10 @@ def makeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int):
     """
 
     if maxDepth == 0:
-        return getMostFrequentLabel(trainingData)
+        return TreeNode(True, "none", getMostFrequentLabel(trainingData))
 
-
-    pass
+    print("error not implemented")
+    return
 
 def getMostFrequentLabel(trainingData: list[Dict[str, int]])->str:
 

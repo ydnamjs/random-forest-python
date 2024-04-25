@@ -109,6 +109,6 @@ def parseData():
 
     featureBinSets = calcFeatureBins(rawFeatureSets)
 
-    return binFeatures(rawFeatureSets, featureBinSets)
+    return [binFeatures(rawFeatureSets, featureBinSets), labels]
 
 parseData()

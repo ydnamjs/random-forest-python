@@ -1,4 +1,8 @@
-FEATURE_TITLES = [
+from typing import Dict
+
+LABEL_CLASS_NAME = "class"
+
+FEATURE_NAMES = [
     "User Age", 
     "User Description Length", 
     "User Follower Count", 
@@ -91,7 +95,20 @@ def binFeatures(rawFeatureSets: list[list[int]], featureBinSets: list[list[int]]
     
     return binnedFeatureSets
 
-def parseData():
+def convertDataToDicts(data: list[list[int]], labels: list[int])->list[Dict[str, int]]:
+    dataDicts: list[Dict[str, int]] = []
+    for i in range(0, len(data)):
+        rowDict = {}
+        for j in range(0, len(data[0])):
+            featureName = FEATURE_NAMES[j]
+            rowDict[featureName] = data[i][j]
+        rowDict[LABEL_CLASS_NAME] = labels[i]
+        dataDicts.append(rowDict)
+    
+    return dataDicts
+
+
+def parseData()->list[Dict[str, int]]:
 
     labelsFile = open(LABELS_PATH, "r")
     featuresFile = open(FEATURE_PATH, "r")
@@ -109,6 +126,4 @@ def parseData():
 
     featureBinSets = calcFeatureBins(rawFeatureSets)
 
-    return [binFeatures(rawFeatureSets, featureBinSets), labels]
-
-parseData()
+    return convertDataToDicts(binFeatures(rawFeatureSets, featureBinSets), labels)

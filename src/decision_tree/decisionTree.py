@@ -1,7 +1,28 @@
 from dataclasses import dataclass
 from typing import Dict
 
-from parseData import LABEL_CLASS_NAME, FEATURE_NAMES
+from decision_tree.GetMostFrequentValueTest import getMostFrequentLabel
+
+LABEL_CLASS_NAME = "class"
+
+FEATURE_NAMES = [
+    "User Age", 
+    "User Description Length", 
+    "User Follower Count", 
+    "User Friends Count",
+    "User Favorites",
+    "User Lists",
+    "User Statuses Count",
+    "Hashtag Count",
+    "Mention Count",
+    "URL Count",
+    "Text Length",
+    "Text Digits",
+    "Retweeted Favorites Count",
+    "Is Truncated",
+    "User Is Default",
+    "Number Us"
+]
 
 @dataclass
 class TreeNode:
@@ -28,34 +49,6 @@ def makeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int)->TreeNod
 
     print("error not implemented")
     return
-
-def getMostFrequentLabel(trainingData: list[Dict[str, int]])->str:
-
-    labelCounts: Dict[str, int] = {}
-
-    for row in trainingData:
-        label = row.get("class")
-
-        if label is None:
-            exit()
-
-        currValue = labelCounts.get(label)
-
-        if (currValue is None):
-            labelCounts[label] = 1
-        else:
-            labelCounts[label] = labelCounts[label] + 1
-    
-    highestFrequency = int(float("-inf"))
-    for value in labelCounts.values():
-        if value > highestFrequency:
-            highestFrequency = value
-    
-    for key in labelCounts.keys():
-        if labelCounts.get(key) == highestFrequency:
-            return key
-    
-    return "ERROR"
 
 def getValueLabelDicts(feature: str, trainingData: list[Dict[str, int]])->Dict[int, Dict[int, int]]:
     

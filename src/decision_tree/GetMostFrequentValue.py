@@ -1,6 +1,6 @@
 from typing import Dict
 
-def getMostFrequentLabel(labels: list[int])->int:
+def GetMostFrequentLabel(labels: list[int])->int:
 
     if len(labels) == 0:
         raise ValueError("GET MOST FREQUENT LABEL CALLED WITH EMPTY LIST")

@@ -1,4 +1,4 @@
-from decision_tree.CalcConditionalEntropy import calcConditionalEntropy
+from decision_tree.CalcConditionalEntropy import CalcConditionalEntropy
 from parseData import parseData
 
 featuresValuesData = {

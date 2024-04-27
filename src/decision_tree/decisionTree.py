@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import Dict
 
-from decision_tree.GetMostFrequentValueTest import getMostFrequentLabel
-from decision_tree.CalcConditionalEntropy import calcConditionalEntropy
+from decision_tree.GetMostFrequentValueTest import GetMostFrequentLabel
+from decision_tree.CalcConditionalEntropy import CalcConditionalEntropy
 
 LABEL_NAME = "class"
 
@@ -40,13 +40,13 @@ def makeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int)->TreeNod
     """
 
     if maxDepth == 0 or len(trainingData) == 0:
-        return TreeNode(True, "none", getMostFrequentLabel(getValues(trainingData, LABEL_NAME)))
+        return TreeNode(True, "none", GetMostFrequentLabel(getValues(trainingData, LABEL_NAME)))
 
     bestSplitAttribute = ""
     bestSplitEntropy = float("inf")
 
     for featureDict in trainingData:
-        featureEntropy = calcConditionalEntropy()
+        featureEntropy = CalcConditionalEntropy()
 
     print("error not implemented")
     return

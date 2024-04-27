@@ -1,4 +1,4 @@
-from decision_tree.CalcConditionalEntropy import calcConditionalEntropy
+from decision_tree.CalcConditionalEntropy import CalcConditionalEntropy
 import math
 
 SUCCESS_COLOR = "\033[92m"
@@ -26,7 +26,7 @@ def TestSingleValue()->bool:
 
     valueLabelDicts = []
     valueLabelDicts.append({0: 4, 1: 13})
-    result = calcConditionalEntropy(valueLabelDicts)
+    result = CalcConditionalEntropy(valueLabelDicts)
 
     if(not (math.isclose(result, expected))):
         print(f"{FAIL_COLOR}TEST FAILED: SINGLE VALUE: expected: " + str(expected) + " recieved: " + str(result)  + NORM_COLOR)
@@ -42,7 +42,7 @@ def TestMultipleValue()->bool:
     valueLabelDicts = []
     valueLabelDicts.append({0: 0, 1: 4})
     valueLabelDicts.append({0: 1, 1: 1})
-    result = calcConditionalEntropy(valueLabelDicts)
+    result = CalcConditionalEntropy(valueLabelDicts)
 
     if(not (math.isclose(result, expected))):
         print(f"{FAIL_COLOR}TEST FAILED: TWO VALUES TWO CLASSES: expected: " + str(expected) + " recieved: " + str(result)  + NORM_COLOR)
@@ -62,7 +62,7 @@ def TestManyValue()->bool:
     valueLabelDicts3.append({1: 1, 2: 1, 3: 1, 4: 1})
     valueLabelDicts3.append({4: 3, 3: 1})
 
-    result3 = calcConditionalEntropy(valueLabelDicts3)
+    result3 = CalcConditionalEntropy(valueLabelDicts3)
 
     if(not (math.isclose(result3, expected3))):
         print(f"{FAIL_COLOR}TEST FAILED: MULTIPLE VALUES AND MULTIPLE CLASSES: expected: " + str(expected3) + " recieved: " + str(result3)  + NORM_COLOR)

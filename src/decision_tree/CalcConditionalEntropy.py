@@ -1,7 +1,7 @@
 from typing import Dict
 from math import log2
 
-def calcConditionalEntropy(valueLabelDicts: list[Dict[int, int]])->float:
+def CalcConditionalEntropy(valueLabelDicts: list[Dict[int, int]])->float:
     """
         @param valueLabelDicts: list of each feature's value classification amounts
         ex: if our feature could be the value 0 or 1 and our label could be 3 or 4 and our data looked like

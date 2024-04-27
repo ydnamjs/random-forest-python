@@ -3,27 +3,9 @@ from typing import Dict
 
 from decision_tree.GetMostFrequentValueTest import GetMostFrequentLabel
 from decision_tree.CalcConditionalEntropy import CalcConditionalEntropy
+from decision_tree.MakeValueLabelDict import MakeValueLabelDict
 
 LABEL_NAME = "class"
-
-FEATURE_NAMES = [
-    "User Age", 
-    "User Description Length", 
-    "User Follower Count", 
-    "User Friends Count",
-    "User Favorites",
-    "User Lists",
-    "User Statuses Count",
-    "Hashtag Count",
-    "Mention Count",
-    "URL Count",
-    "Text Length",
-    "Text Digits",
-    "Retweeted Favorites Count",
-    "Is Truncated",
-    "User Is Default",
-    "Number Us"
-]
 
 @dataclass
 class TreeNode:
@@ -40,18 +22,29 @@ def makeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int)->TreeNod
     """
 
     if maxDepth == 0 or len(trainingData) == 0:
-        return TreeNode(True, "none", GetMostFrequentLabel(getValues(trainingData, LABEL_NAME)))
+        return TreeNode(True, "none", GetMostFrequentLabel(GetValues(trainingData, LABEL_NAME)))
+
+    firstRow = trainingData[0]
+    featureNames = firstRow.keys()
+    labels = GetValues(trainingData, LABEL_NAME)
 
     bestSplitAttribute = ""
     bestSplitEntropy = float("inf")
 
-    for featureDict in trainingData:
-        featureEntropy = CalcConditionalEntropy()
+    for featureName in featureNames:
+        featureValues = GetValues(trainingData, featureName)
+        valueLabelDicts = MakeValueLabelDict(featureValues, labels)
+        featureEntropy = CalcConditionalEntropy(valueLabelDicts.values())
 
-    print("error not implemented")
-    return
+        if featureEntropy < bestSplitEntropy:
+            bestSplitEntropy = featureEntropy
+            bestSplitAttribute = featureName
 
-def getValues(data: list[Dict[str, int]], featureName: str)->list[int]:
+
+
+    return TreeNode(False, bestSplitAttribute, )
+
+def GetValues(data: list[Dict[str, int]], featureName: str)->list[int]:
     values = []
     for row in data:
         value = row.get(featureName)

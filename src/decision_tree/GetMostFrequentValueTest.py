@@ -4,13 +4,13 @@ SUCCESS_COLOR = "\033[92m"
 FAIL_COLOR = "\033[91m"
 NORM_COLOR = "\033[0m"
 
-def testGetMostFrequentValue()->bool:
+def TestGetMostFrequentValue()->bool:
     testSuitePassed = True
 
-    testSuitePassed = testNoData() and testSuitePassed
-    testSuitePassed = testSingleRow() and testSuitePassed
-    testSuitePassed = testManyLabels() and testSuitePassed
-    testSuitePassed = testSameFrequency() and testSuitePassed
+    testSuitePassed = TestNoData() and testSuitePassed
+    testSuitePassed = TestSingleRow() and testSuitePassed
+    testSuitePassed = TestManyLabels() and testSuitePassed
+    testSuitePassed = TestSameFrequency() and testSuitePassed
 
 
     if testSuitePassed:
@@ -20,7 +20,7 @@ def testGetMostFrequentValue()->bool:
 
     return testSuitePassed
 
-def testNoData()->bool:
+def TestNoData()->bool:
     """Should raise a value error if there are no rows"""
     data = []
 
@@ -35,9 +35,9 @@ def testNoData()->bool:
         return True
 
     print(f"{FAIL_COLOR}TEST FAILED: NO DATA: expected ValueError to be raised" + NORM_COLOR)
-    return True
+    return False
 
-def testSingleRow()->bool:
+def TestSingleRow()->bool:
     """Should return the only label when there is 1 entry"""
 
     expected = 1
@@ -51,7 +51,7 @@ def testSingleRow()->bool:
 
     return True
 
-def testManyLabels()->bool:
+def TestManyLabels()->bool:
     """Should return the most frequent label when multiple labels are present regardless of order"""
 
     expected = 3
@@ -66,7 +66,7 @@ def testManyLabels()->bool:
     return True
 
 
-def testSameFrequency()->bool:
+def TestSameFrequency()->bool:
     """Should return the first encountered label that shares the highest frequency"""
 
     expected = 3

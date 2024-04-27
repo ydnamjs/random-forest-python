@@ -5,8 +5,8 @@ SUCCESS_COLOR = "\033[92m"
 FAIL_COLOR = "\033[91m"
 NORM_COLOR = "\033[0m"
 
-def testCalcConditionalEntropy()->bool:
-    
+def TestCalcConditionalEntropy()->bool:
+
     testSuitePassed = True
 
     testSuitePassed = testSingleValue() and testSuitePassed

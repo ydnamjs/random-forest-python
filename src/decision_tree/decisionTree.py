@@ -2,8 +2,9 @@ from dataclasses import dataclass
 from typing import Dict
 
 from decision_tree.GetMostFrequentValueTest import getMostFrequentLabel
+from decision_tree.CalcConditionalEntropy import calcConditionalEntropy
 
-LABEL_CLASS_NAME = "class"
+LABEL_NAME = "class"
 
 FEATURE_NAMES = [
     "User Age", 
@@ -38,38 +39,26 @@ def makeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int)->TreeNod
         @param maxDepth: the maximum depth of the tree/subtree
     """
 
-    if maxDepth == 0:
-        return TreeNode(True, "none", getMostFrequentLabel(trainingData))
+    if maxDepth == 0 or len(trainingData) == 0:
+        return TreeNode(True, "none", getMostFrequentLabel(getValues(trainingData, LABEL_NAME)))
 
     bestSplitAttribute = ""
     bestSplitEntropy = float("inf")
 
     for featureDict in trainingData:
-        pass
+        featureEntropy = calcConditionalEntropy()
 
     print("error not implemented")
     return
 
-def getValueLabelDicts(feature: str, trainingData: list[Dict[str, int]])->Dict[int, Dict[int, int]]:
-    
-    valueLabelDicts = Dict[int, Dict[int, int]] = {}
-    
-    for row in trainingData:
-        value = row.get(feature)
-        label = row.get(LABEL_CLASS_NAME)
+def getValues(data: list[Dict[str, int]], featureName: str)->list[int]:
+    values = []
+    for row in data:
+        value = row.get(featureName)
 
-        if (label is None or value is None):
-            exit()
+        if value is None:
+            raise ValueError("Attempted to get value of nonexistent feature in getValues feature:" + featureName)
 
-        valueDict = valueLabelDicts.get(value)
-        if (valueDict is None):
-            valueLabelDicts[value] = {}
-            valueLabelDicts.get(value)[label] = 1
-        else:
-            labelDict = valueDict.get(label)
+        values.append(value)
 
-            if (labelDict is None):
-                labelDict[label] = 1
-            else:
-                labelDict[label] = labelDict.get(label) + 1
-    return valueLabelDicts
+    return values

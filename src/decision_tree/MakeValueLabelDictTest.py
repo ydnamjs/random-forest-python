@@ -10,6 +10,7 @@ def TestMakeValueLabelDict()->bool:
     testSuitePassed = TestDataLenMismatch() and testSuitePassed
     testSuitePassed = TestNoData() and testSuitePassed
     testSuitePassed = TestSinglePair() and testSuitePassed
+
     if testSuitePassed:
         print(f"{SUCCESS_COLOR}TEST SUITE PASSED: MAKE VALUE LABEL DICT" + NORM_COLOR)
     else:

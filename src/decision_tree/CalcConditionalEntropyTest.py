@@ -9,9 +9,9 @@ def TestCalcConditionalEntropy()->bool:
 
     testSuitePassed = True
 
-    testSuitePassed = testSingleValue() and testSuitePassed
-    testSuitePassed = testMultipleValue() and testSuitePassed
-    testSuitePassed = testManyValue() and testSuitePassed
+    testSuitePassed = TestSingleValue() and testSuitePassed
+    testSuitePassed = TestMultipleValue() and testSuitePassed
+    testSuitePassed = TestManyValue() and testSuitePassed
 
     if testSuitePassed:
         print(f"{SUCCESS_COLOR}TEST SUITE PASSED: CALC CONDITIONAL ENTROPY" + NORM_COLOR)
@@ -20,7 +20,7 @@ def TestCalcConditionalEntropy()->bool:
     
     return testSuitePassed
 
-def testSingleValue()->bool:
+def TestSingleValue()->bool:
 
     expected = -1 * ((4/17) * math.log2(4/17) + (13/17) * math.log2(13/17))
 
@@ -35,7 +35,7 @@ def testSingleValue()->bool:
     return True
 
 
-def testMultipleValue()->bool:
+def TestMultipleValue()->bool:
 
     expected = ((-4 / 6) * (1 * math.log2(1) + 0)) + (-2 / 6) * (.5 * math.log2(.5) + .5 * math.log2(.5))
 
@@ -50,7 +50,7 @@ def testMultipleValue()->bool:
 
     return True
 
-def testManyValue()->bool:
+def TestManyValue()->bool:
 
     value1Entropy = (-6/14) * (3/6 * math.log2(3/6) + 3/6 * math.log2(3/6))
     value2Entropy = (-4/14) * (1/4 * math.log2(1/4) + 1/4 * math.log2(1/4) + 1/4 * math.log2(1/4) + 1/4 * math.log2(1/4))

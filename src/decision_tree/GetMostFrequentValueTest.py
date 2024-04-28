@@ -13,9 +13,9 @@ def TestGetMostFrequentValue()->bool:
     testSuitePassed = TestSameFrequency() and testSuitePassed
 
     if testSuitePassed:
-        print(f"{SUCCESS_COLOR}TEST SUITE PASSED: GET MOST FREQUENT LABEL" + NORM_COLOR)
+        print(f"{SUCCESS_COLOR}TEST SUITE PASSED: GET MOST FREQUENT VALUE" + NORM_COLOR)
     else:
-        print(f"{FAIL_COLOR}TEST SUITE FAILED: GET MOST FREQUENT LABEL" + NORM_COLOR)
+        print(f"{FAIL_COLOR}TEST SUITE FAILED: GET MOST FREQUENT VALUE" + NORM_COLOR)
 
     return testSuitePassed
 

@@ -1,4 +1,4 @@
-from decision_tree.GetMostFrequentValue import GetMostFrequentLabel
+from decision_tree.GetMostFrequentValue import GetMostFrequentValue
 
 SUCCESS_COLOR = "\033[92m"
 FAIL_COLOR = "\033[91m"
@@ -26,7 +26,7 @@ def TestNoData()->bool:
     errorRaised = False
 
     try:
-        GetMostFrequentLabel(data)
+        GetMostFrequentValue(data)
     except ValueError:
         errorRaised = True
 
@@ -42,7 +42,7 @@ def TestSingleRow()->bool:
     expected = 1
 
     labels = [1]
-    result = GetMostFrequentLabel(labels)
+    result = GetMostFrequentValue(labels)
 
     if(result != expected):
         print(f"{FAIL_COLOR}TEST FAILED: SINGLE ROW: expected:" + str(expected) + " recieved: " + str(result) + NORM_COLOR)
@@ -56,7 +56,7 @@ def TestManyLabels()->bool:
     expected = 3
 
     labels = [1, 1, 3, 3, 3, 3, 3, 2, 2, 2]
-    result = GetMostFrequentLabel(labels)
+    result = GetMostFrequentValue(labels)
 
     if(result != expected):
         print(f"{FAIL_COLOR}TEST FAILED: MANY LABELS: expected:" + str(expected) + " recieved: " + str(result) + NORM_COLOR)
@@ -71,7 +71,7 @@ def TestSameFrequency()->bool:
     expected = 3
 
     labels = [1, 3, 3, 5, 5]
-    result = GetMostFrequentLabel(labels)
+    result = GetMostFrequentValue(labels)
 
     if(result != expected):
         print(f"{FAIL_COLOR}TEST FAILED: SAME FREQUENCY: expected:" + str(expected) + " recieved: " + str(result) + NORM_COLOR)

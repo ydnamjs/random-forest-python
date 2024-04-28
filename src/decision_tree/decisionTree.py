@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict
 
-from decision_tree.GetMostFrequentValueTest import GetMostFrequentLabel
+from decision_tree.GetMostFrequentValue import GetMostFrequentValue
 from decision_tree.CalcConditionalEntropy import CalcConditionalEntropy
 from decision_tree.MakeValueLabelDict import MakeValueLabelDict
 
@@ -22,7 +22,7 @@ def makeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int)->TreeNod
     """
 
     if maxDepth == 0 or len(trainingData) == 0:
-        return TreeNode(True, "none", GetMostFrequentLabel(GetValues(trainingData, LABEL_NAME)))
+        return TreeNode(True, "none", GetMostFrequentValue(GetValues(trainingData, LABEL_NAME)))
 
     firstRow = trainingData[0]
     featureNames = firstRow.keys()
@@ -40,7 +40,8 @@ def makeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int)->TreeNod
             bestSplitEntropy = featureEntropy
             bestSplitAttribute = featureName
 
-
+    if bestSplitAttribute == "":
+        return TreeNode(True, "none", GetMostFrequentValue(GetValues(trainingData, LABEL_NAME)))
 
     return TreeNode(False, bestSplitAttribute, )
 

@@ -3,6 +3,7 @@ from decision_tree.ExtractFeatureValuesTest import TestExtractFeatureValues
 from decision_tree.GetMostFrequentValueTest import TestGetMostFrequentValue
 from decision_tree.MakeValueLabelDictTest import TestMakeValueLabelDict
 from decision_tree.SplitDataOnTest import TestSplitDataOn
+from decision_tree.PredictTest import TestPredict
 
 SUCCESS_COLOR = "\033[92m"
 NORM_COLOR = "\033[0m"
@@ -15,6 +16,7 @@ def testAll()->bool:
     allTestsPassed = TestMakeValueLabelDict() and allTestsPassed
     allTestsPassed = TestSplitDataOn() and allTestsPassed
     allTestsPassed = TestExtractFeatureValues() and allTestsPassed
+    allTestsPassed = TestPredict() and allTestsPassed
 
     if allTestsPassed:
         print(f"{SUCCESS_COLOR}ALL TESTS PASSED" + NORM_COLOR)

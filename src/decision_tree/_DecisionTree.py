@@ -32,11 +32,14 @@ def MakeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int, labelNam
         @returns a TreeNode used for classification
     """
 
-    if maxDepth == 0 or len(trainingData) == 0:
+    if maxDepth == 1 or len(trainingData) == 0:
         return TreeNode("none", {}, GetMostFrequentValue(ExtractFeatureValues(trainingData, labelName)))
 
-    firstRow = trainingData[0]
-    featureNames = firstRow.keys()
+    featureNames = []
+    for key in trainingData[0].keys():
+        if key != labelName:
+            featureNames.append(key)
+
     labels = ExtractFeatureValues(trainingData, labelName)
 
     bestSplitAttribute = ""
@@ -57,6 +60,6 @@ def MakeDecisionTree(trainingData: list[Dict[str, int]], maxDepth: int, labelNam
     children = {}
     partitionedData = SplitDataOn(bestSplitAttribute, trainingData)
     for key in partitionedData.keys():
-        children[key] = MakeDecisionTree(partitionedData[key], maxDepth-1)
+        children[key] = MakeDecisionTree(partitionedData[key], maxDepth-1, labelName)
 
-    return TreeNode(bestSplitAttribute, children)
+    return TreeNode(bestSplitAttribute, children, GetMostFrequentValue(ExtractFeatureValues(trainingData, labelName)))

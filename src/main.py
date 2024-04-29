@@ -1,20 +1,12 @@
-from decision_tree.CalcConditionalEntropy import CalcConditionalEntropy
+from decision_tree.Predict import Predict
+from decision_tree._DecisionTree import MakeDecisionTree
 from parseData import parseData
-
-featuresValuesData = {
-    0: {
-        0: 1,
-        1: 1,
-    },
-    1: {
-        0: 0,
-        1: 4,
-    },
-}
-
-#print(calcConditionalEntropy(featuresValuesData.values()))
 
 data = parseData()
 
-for row in data:
-    print(row)
+
+
+root = MakeDecisionTree(data, 8, "class")
+
+result = Predict(data[0], root)
+print(result)

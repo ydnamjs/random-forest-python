@@ -8,10 +8,10 @@ from parseData import parseData
 
 # CONFIG
 NUM_TREES = 25 # number of trees in a random forest
-TREE_DEPTH = 5 # maximum depth of a tree
+TREE_DEPTH = 3 # maximum depth of a tree
 TREE_FEATURES = 7 # number of features a tree is to be given (chosen at random from the total)
 TREE_SAMPLE_RATIO = 50/100 # portion of the data the tree is given to be trained (chosen at random from forest training data)
-FOLD_COUNT = 10 # number of folds for testing random forest success
+FOLD_COUNT = 5 # number of folds for testing random forest success
 
 # NAME OF LABEL AS IN PARSE DATA DO NOT EDIT
 LABEL_NAME = "class"
@@ -202,7 +202,7 @@ def main():
         else:
             f1Score = 2 * ((prec * reca) / (prec + reca))
 
-        print("FOLD " + str(i) + ":")
+        print("TEST FOLD IS FOLD #" + str(i + 1) + ":")
         print("Accuracy: " + str(acc))
         print("Precision: " + str(prec))
         print("Recall: " + str(reca))

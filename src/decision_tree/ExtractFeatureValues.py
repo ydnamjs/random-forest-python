@@ -6,7 +6,7 @@ def ExtractFeatureValues(data: list[Dict[str, int]], featureName: str)->list[int
         value = row.get(featureName)
 
         if value is None:
-            raise ValueError("Attempted to get value of nonexistent feature in getValues feature:" + featureName)
+            raise ValueError("Attempted to get value of nonexistent feature in getValues feature:" + str(featureName))
 
         values.append(value)
 
